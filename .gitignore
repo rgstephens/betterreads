@@ -8,3 +8,6 @@ build/
 dist/
 docs/make.bat
 .python-version
+
+# vscode ide
+.history

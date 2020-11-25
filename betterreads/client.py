@@ -32,6 +32,17 @@ class GoodreadsClient:
     def query_dict(self):
         return {"key": self.client_key}
 
+    def authenticate_url(self, access_token=None, access_token_secret=None):
+        """Return authentication URL"""
+        self.session = GoodreadsSession(
+            self.client_key, self.client_secret, access_token, access_token_secret
+        )
+        if access_token and access_token_secret:
+            self.session.oauth_resume()
+        else:
+            url = self.session.oauth_init()
+            return url
+
     def authenticate(self, access_token=None, access_token_secret=None):
         """Authenticate client to query requiring authorization"""
         self.session = GoodreadsSession(
